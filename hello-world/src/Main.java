@@ -1,4 +1,6 @@
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -145,8 +147,9 @@ public class Main {
         map.get("One");
 
         User user1 = new User(1,"User1","usr@gg.com");
-        User user2 = new User(2,"User2","usr2@email.com");
+        User user2 = new User(2,"TechUser","usr2@email.com");
         User user3 = new User(1,"User1","usr1@tt.co.uk");
+        User user4 = new User(3,"User3","usr23@tt.co.uk");
 
         Map<User,String> userStringMap = new HashMap<>();
         userStringMap.put(user1,"User1");
@@ -156,10 +159,158 @@ public class Main {
         for(Map.Entry<User,String> entry: userStringMap.entrySet()){
             System.out.println("Key : "+entry.getKey()+" Value:  "+entry.getValue()+"Hash "+entry.getKey().hashCode());
         }
+
+        // List of users
+
+        List<User> userList = new ArrayList<>();
+        userList.add(user4);
+        userList.add(user1);
+        userList.add(user2);
+
+        // natural sorting :
+        // approach 1: Comparable (I)
+        // approach 2: Comparator (I)
+        Collections.sort(userList,new SortUserByName());
+
+        for (User uu:userList) {
+            System.out.println(uu);
+        }
+
+        List<String> strings = new ArrayList<>();
+        strings.add("Hello");
+        strings.add("Welcome");
+        strings.add("Hola");
+
+        // natural sort
+        Collections.sort(strings,Comparator.reverseOrder());
+
+        for (String sr:strings) {
+            System.out.println(sr);
+        }
+
+        //LinkedHashMap - use this to maintain the insertion order
+
+
+        // use an interface or abstract class without implementing it
+
+
+        // anonymous class
+        I1 ii = new I1() {
+            @Override
+            public void add() {
+                System.out.println("Hello Ii");
+            }
+        };
+
+        I1 iLambda = ()-> System.out.println("Hello Lambda");
+
+        I1 iLambda1 = () -> {
+            System.out.print("");
+            System.out.print("");
+        };
+
+        ii.add();
+
+        Employee emp1 = new Employee(1,"Techmomo",1000);
+        Employee emp2 = new Employee(4,"John",300);
+        Employee emp3 = new Employee(3,"Bob",400);
+        Employee emp4 = new Employee(2,"Steve",1500);
+
+
+        List<Employee> employees = new ArrayList<>();
+        employees.add(emp1);
+        employees.add(emp4);
+        employees.add(emp3);
+        employees.add(emp2);
+
+        // traverse via the list using streams
+        employees.stream().forEach(e-> System.out.println(e));
+
+        // sort the list
+
+        //List<Employee> sorted = employees.stream().sorted((e1,e2)-> e1.getSalary() - e2.getSalary()).collect(Collectors.toList());
+        //employees.stream().sorted((e1,e2)-> e1.getSalary() - e2.getSalary()).forEach(e->System.out.println(e));
+        //employees.stream().sorted(Comparator.comparingInt(Employee::getSalary)).forEach(e->System.out.println(e));
+
+        // build a map from the sorted list
+        employees
+                .stream()
+                //.sorted(Comparator.comparingInt(Employee::getSalary))
+                //.collect(Collectors.toMap(k->k.getId(),v->v,(uu,v)->uu,LinkedHashMap::new));
+                .collect(Collectors.toMap(Employee::getId, Function.identity(),(e1,e2)-> e1,TreeMap::new))
+                .forEach((k,v)-> System.out.println(k +" "+v ));
+                //.collect(Collectors.toMap(k->k.getId(),v->v)).forEach((k,v)-> System.out.println(k +" "+v ));
+
+        // end of main
     }
 }
 
-class User{
+
+class Employee implements Comparable<Employee>{
+    private int id;
+    private String name;
+    private int salary;
+
+    public Employee(int id, String name, int salary) {
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getSalary() {
+        return salary;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = salary;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return id == employee.id &&
+                Double.compare(employee.salary, salary) == 0 &&
+                name.equals(employee.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, salary);
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", salary=" + salary +
+                '}';
+    }
+
+    @Override
+    public int compareTo(Employee o) {
+        return this.getSalary() - o.getSalary();
+    }
+}
+class User { //implements Comparable<User>{
     public User(){
 
     }
@@ -199,7 +350,7 @@ class User{
 
     @Override
     public String toString() {
-        return this.id +" ,"+ this.name + this.email;
+        return this.id +" ,"+ this.name +" ,"+ this.email;
     }
 
     @Override
@@ -215,8 +366,21 @@ class User{
     public int hashCode() {
         return Objects.hash(id, name);
     }
+
+//    @Override
+//    public int compareTo(User o) {
+//        //return this.getId() - o.getId();
+//        // sort by string members;
+//        return this.getName().compareTo(o.getName());
+//    }
 }
 
+class SortUserByName implements Comparator<User>{
+    @Override
+    public int compare(User o1, User o2) {
+        return o2.getName().compareTo(o1.getName());
+    }
+}
 //class Abc{
 //
 //}
@@ -293,4 +457,56 @@ class StepChild implements StepParent{
 *   Default methods, Static methods
 *
 *
+* Problem 1: Sort by User name
+*   e.g. [ {1,User1, 1000}, {4,User3,400}, {2,User2,600}]
+*   Expected : [
+*                {1,User1,1000},
+*                {2,User2,600},
+*                {4,User3,400}
+*     ]
+* Problem 2: give me the users in order of highest salary, based on user id
+*   e.g. [ {u1,User1, 1000}, {u4,User3,400}, {u2,User2,600}]
+*  Expected : {
+*                   {u1: {u1,User1,1000}}
+*                   {u2: {u2,User2,600}}
+*                   {u4: {u4,User3,400}}
+*               }
+*
 * */
+
+
+@FunctionalInterface
+interface I1{
+    void add();
+    //void sub(); // not permitted
+    default void process(){
+        System.out.println("Welcome to I1");
+    }
+}
+
+interface I2 {
+    void add();
+    static void automate(){
+        System.out.println("I2");
+    }
+    default void process(){
+        System.out.println("Welcome to I2");
+    }
+}
+
+class A implements I1,I2{
+    @Override
+    public void add() {
+        I2.automate();
+    }
+
+    @Override
+    public void process() {
+        // if you want to call the interface default methods
+        I1.super.process();
+        I2.super.process();
+
+        // call static method
+        I2.automate();
+    }
+}
