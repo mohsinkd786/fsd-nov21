@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//@Component
+@Component
 //@Scope("prototype")
-@Service
+//@Service
 public class UserService {
 
     private List<UserDto> userDtos = new ArrayList<>();

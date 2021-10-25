@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//@RequiredArgsConstructor
+@RequiredArgsConstructor // to autowire via lombok required constructor
 @RequestMapping("/users")
 @RestController
 public class UserController {
@@ -19,12 +19,12 @@ public class UserController {
     // autowiring - by type , by name
     // via constructor / setter / variable injection
     //@Autowired
-    private UserService service;
+    private final UserService service;
 
-    @Autowired
-    public UserController(UserService userService){
-        this.service = userService;
-    }
+//    @Autowired
+//    public UserController(UserService userService){
+//        this.service = userService;
+//    }
 
     // in case of using setter injection
 //    @Autowired
