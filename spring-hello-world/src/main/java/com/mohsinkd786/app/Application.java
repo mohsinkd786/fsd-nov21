@@ -34,6 +34,12 @@ public class Application {
 * 			f. Square Root
 *
 *
+* Problem 2: Given an Entity Employee , perform Crud operations on it , similar to User ,
+* 	 in addition to that an Employee can have multiple addresses, I want to be able to search based on city & state,
+* e.g. if we have 2 employees from Delhi, it should allow me to search based on the city e.g. something like
+*  http://localhost:8111/employees/search?city=Delhi /GET - result should fetch me all the users from Delhi
+*
+*
 * Note : Keep the uri's as clean as possible
 *
 * */
