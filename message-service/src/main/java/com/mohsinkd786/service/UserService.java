@@ -39,4 +39,16 @@ public class UserService {
 *       uses spring-hello-world (http://localhost:8111/users /POST)
 *
 *
+*
+* Problem 1: Assume we have two micro services -
+*               service-1  - user info,
+*               service-2 , - project info
+*
+* service-3:
+*   Build an application to give me Project account details such as : Project budget & cost investments, user salaries &
+*       their peers such as A is the manager of B so B reports to A or A has two sub ordinates : B & C
+*
+*
+*
+*
 * */
