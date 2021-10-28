@@ -1,6 +1,7 @@
 package com.mohsinkd786.controller;
 
 import com.mohsinkd786.dto.UserDto;
+import com.mohsinkd786.service.GithubService;
 import com.mohsinkd786.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ public class UserController {
     // via constructor / setter / variable injection
     //@Autowired
     private final UserService service;
+    private final GithubService githubService;
 
 //    @Autowired
 //    public UserController(UserService userService){
@@ -56,5 +58,10 @@ public class UserController {
     public List<UserDto> getUsers(){
         //return userDtos;
         return service.getUsers();
+    }
+
+    @GetMapping("/github")
+    public ResponseEntity<String> githubNameforUser(){
+        return ResponseEntity.ok(githubService.getNameFromGithub());
     }
 }
