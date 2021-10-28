@@ -33,3 +33,10 @@ public class UserService {
         return responseEntity.getBody();
     }
 }
+
+/*
+*  message-service = endpoints ( )
+*       uses spring-hello-world (http://localhost:8111/users /POST)
+*
+*
+* */
