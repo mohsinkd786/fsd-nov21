@@ -12,7 +12,7 @@ import java.util.HashMap;
 @Service
 public class UserService {
 
-    @Value("${external.api.hello-world}")
+    @Value("# {'${external.api.hello-world}'}")
     private String url;
 
     private RestTemplate restTemplate;
