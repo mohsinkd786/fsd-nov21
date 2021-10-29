@@ -1,0 +1,72 @@
+MicroServices:
+1. stock-market-service (handle stock exchanges, register ipos)
+    endpoints:
+        /exchange : - enlist stock exchange
+        /GET - get all exchanges
+        /GET/{exchangeId} - get exchange details
+        /POST - setup a new exchange
+        /PUT - update an exchange
+        /DELETE/{exchangeId} - delete an exchange
+2. user-service (deal with all user operations such as CRUD & administrative users as well)
+    endpoints:
+        /user : user specs
+        /GET/{userId} - get user details
+        /POST - create a user with role (whether ADMIN or no admin user)
+
+3. company-service (deal with company CRUD, manage company & user details)
+4. dto-service (define all dtos here)- it can be used as a jar file
+
+Entities:
+
+StockExchange:
+    id: auto generated (pk)
+    exchangeId: uuid
+    name: string
+    description:string
+    address: Address
+
+
+
+Address:
+    id: auto generated (pk)
+    addressId: uuid
+    city: string
+    street: string
+    zipCode: string
+
+User:
+    id: auto generated (pk)
+    userId: uuid
+    username: string
+    password: string
+    role: string (admin / user)
+    status:boolean
+    email: string
+    phone: int
+
+
+
+UserDto:
+    id: string
+    username: string
+    password: string
+    role: string
+    status: boolean
+    email: string
+    phone:int
+
+
+Stock Market :
+
+1. stock-market:
+    stock-market.war file
+
+    part-1.war
+        - http client (resttemplate )
+    part-2.war
+    part-3.war
+
+    shared-dto-service.jar -
+
+1. Database per Service
+2.
