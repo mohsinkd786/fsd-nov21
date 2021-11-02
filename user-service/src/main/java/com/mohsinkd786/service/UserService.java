@@ -1,8 +1,10 @@
 package com.mohsinkd786.service;
 
 import com.mohsinkd786.dto.UserDto;
+import com.mohsinkd786.entity.Address;
 import com.mohsinkd786.entity.User;
 import com.mohsinkd786.mapper.UserMapper;
+import com.mohsinkd786.repository.AddressRepository;
 import com.mohsinkd786.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
