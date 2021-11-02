@@ -1,8 +1,10 @@
 package com.mohsinkd786.mapper;
 
 import com.mohsinkd786.dto.AddressDto;
+import com.mohsinkd786.dto.ProjectDto;
 import com.mohsinkd786.dto.UserDto;
 import com.mohsinkd786.entity.Address;
+import com.mohsinkd786.entity.Project;
 import com.mohsinkd786.entity.User;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.ConfigurableMapper;
@@ -18,6 +20,10 @@ public class UserMapper extends ConfigurableMapper {
                 .field("address.city","addressDto.city")
                 .field("address.zipCode","addressDto.zipCode")
                 .fieldAToB("address.addressId","addressDto.id")
+                .byDefault());
+
+        factory.registerClassMap(factory.classMap(Project.class, ProjectDto.class)
+                .fieldAToB("projectId","id")
                 .byDefault());
     }
 }
