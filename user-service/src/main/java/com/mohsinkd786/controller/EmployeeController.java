@@ -35,4 +35,10 @@ public class EmployeeController {
     public EmployeeDto findEmpById(@PathVariable("id") String id){
         return userService.findEmployeeById(id);
     }
+
+    @GetMapping("/filter/dialCode")
+    public List<EmployeeDto> findByDialCode(@RequestParam("code") String code){
+        System.out.println("Code "+code);
+        return userService.findEmployeesByContactDialCode(code);
+    }
 }

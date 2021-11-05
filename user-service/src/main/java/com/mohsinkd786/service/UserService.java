@@ -83,4 +83,8 @@ public class UserService {
             employeeRepository.delete(employeeFound);
         }
     }
+
+    public List<EmployeeDto> findEmployeesByContactDialCode(String dialCode){
+        return employeeRepository.findByContact_DialCode(dialCode);
+    }
 }

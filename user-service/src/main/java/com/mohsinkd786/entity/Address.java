@@ -7,12 +7,12 @@ import java.util.UUID;
 
 @Data
 @Entity
-@IdClass(AddressId.class)
+//@IdClass(AddressId.class)
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @Id
+    //@Id
     private String addressId = UUID.randomUUID().toString();
     private String street;
     private String city;
